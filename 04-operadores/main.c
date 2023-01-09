@@ -103,5 +103,19 @@ int main(int argc, char const *argv[])
         printf("Esta templado\n");
     }
 
+    // Operador NOT (!)
+
+    // Este operador cambia el valor booleando de la variable a su contrario, si es true entonces sera false, y viceversa.
+
+    bool sunny = true;
+
+    if (!sunny) // Como el valor de sunny es true, al agregarle el ! entonces cambia a false, seria si el valor de sunny NO es true (osea false) ejecuta el siguiente codigo
+    {
+        printf("Esta nublado\n");
+    } else {
+        printf("Esta soleado\n");
+    }
+    
+
     return 0;
 }
