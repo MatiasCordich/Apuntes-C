@@ -1,2 +1,2 @@
 # Apuntes-C
-Apuntes de C, conceptos basicos. 
+Apuntes de C, conceptos basicos entre otras cosas. 
