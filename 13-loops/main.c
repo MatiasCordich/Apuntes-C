@@ -8,7 +8,7 @@ int main(int argc, char const *argv[])
 
     for (int i = 0; i < 10; i++)
     {
-        printf("%i\n", i);
+        printf("El numoer es: %i\n", i);
     }
 
     // el for consta de 3 declaraciones for(1,2,3)
