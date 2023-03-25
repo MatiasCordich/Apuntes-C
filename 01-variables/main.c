@@ -20,7 +20,7 @@ int main(int argc, char const *argv[])
 
     // Mostrar el valor de la variable por consola
 
-    // Pra mostrar los valores de una variables es necesario el uso de los punteros, que se representan con con un simobolo de porcentaje (%) seguido de una letra que representan el tipo de valor
+    // Para mostrar los valores de una variables es necesario el uso de los punteros, que se representan con con un simobolo de porcentaje (%) seguido de una letra que representan el tipo de valor
 
     // Mostrar el valor de la variable name
 
