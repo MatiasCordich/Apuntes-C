@@ -4,6 +4,8 @@ int main(int argc, char const *argv[])
 {
     // Bucle For
 
+    // El bucle For se encarga de repetir una ejecucion de codigo una cierta cantidad de veces.
+
     // El Bucle For consta de la siguiente estructura
 
     for (int i = 0; i < 10; i++)
