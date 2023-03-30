@@ -2,6 +2,9 @@
 
 int main(int argc, char const *argv[])
 {
+
+    // Determinar por teclado la base y la altura de dos 2 rectangulos y sacar la diferencia entre AREAS y PERIMETROS de ambos
+    
     int baseRectangulo_1;
     int alturaRectangulo_1;
     int baseRectangulo_2;

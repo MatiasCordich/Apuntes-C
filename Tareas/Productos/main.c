@@ -2,6 +2,8 @@
 
 int main(int argc, char const *argv[])
 {
+    // Ingresar el precio, stock y costo por teclado y a partir de esos datos calcular la GANANCIA UNITARIA, COSTO TOTAL y GANANCIA TOTAL 
+    
     int precio;
     int stock;
     int costo;
