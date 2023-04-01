@@ -2,7 +2,7 @@
 
 int main(int argc, char const *argv[])
 {
-    // Determinar el AREA de un triangulo 
+    // Determinar el AREA de un triangulo.
 
     int base;
     int altura;
