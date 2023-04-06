@@ -11,6 +11,7 @@ int main(int argc, char const *argv[])
     int num_5;
     int promedio;
 
+    // Ingreso cadad valor de los 5 numeros y lo guardo en sus variables respectivas 
     printf("Ingrese el primer numero: ");
     scanf("%i", &num_1);
 
@@ -26,8 +27,10 @@ int main(int argc, char const *argv[])
     printf("Ingrese el quinto numero: ");
     scanf("%i", &num_5);
 
+    // Calculo el promedio
     promedio = (num_1 + num_2 + num_3 + num_4 + num_5)/5;
 
+    // Imprimo por pantalla el promedio total
     printf("El promedio es de: %i", promedio);
     
     return 0;
