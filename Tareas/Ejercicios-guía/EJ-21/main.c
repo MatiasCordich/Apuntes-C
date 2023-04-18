@@ -2,22 +2,34 @@
 
 int main(int argc, char const *argv[])
 {
-    // DISEÑAR UN ALGORITMO QUE IMPRIMA Y SUME LA SERIE DE NUMEROS 3,6,9,12...99
+    // ESCRIBIR EN PSEUDOCODIGO Y CODIFICAR EN C UN PROGRAMA QUE MUESTRE LOS NÚMEROS PRIMOS COMPRENDIDOS ENTRE 0 Y 100.
 
-    // Declaro mi variable contador y la inicializo en 3
-    int contador = 3;
+    int contador;
+    int i;
+    int primo = 0;
 
-    // Hago un bucle while que se repita hasta que el valor de la variable contador sea mayor A 100
-    while (contador < 100)
-    {
+    // Bucle FOR que vaya desde el 0 al 100
+    for (i = 0; i <= 100; i++)
+    {   
+        // la variable primo es 1 y contador es 2
+        primo = 1;
+        contador = 2;
 
-        // Imprimo por pantalla el valor de contador
-        printf("%i\n", contador);
+        // Mientras se cumplan ambas condiciones
+        while (contador <= i / 2 && primo)
+        {
+            // Y el modulo dice que el valor de i es par
+            if (i % contador == 0)
+                // primo es 0 por lo que es false
+                primo = 0;
 
-        // La serie va de 3 en 3 por lo que a cada iteracion del bucle, el valor de contador le tengo que sumar de a 3
-        contador = contador + 3;
+            contador++;
+        }
+
+        // Primo es 1 true, entonces el valor de i es primo
+        if (primo)
+            printf("%\n ", i);
     }
 
-    printf("Fin del programa");
     return 0;
 }

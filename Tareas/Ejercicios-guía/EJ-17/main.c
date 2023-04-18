@@ -2,22 +2,28 @@
 
 int main(int argc, char const *argv[])
 {
-    // DISEÑAR UN ALGORITMO QUE IMPRIMA Y SUME LA SERIE DE NUMEROS 3,6,9,12...99
+    // ESCRIBIR EN PSEUDOCODIGO Y CODIFICAR EN C UN PROGRAMA QUE MUESTRE LOS MÚLTIPLOS DE 2 Y DE 3 Y DE AMBOS COMPRENDIDOS ENTRE 0 Y 100
+    // Declaro mi varialbe
 
-    // Declaro mi variable contador y la inicializo en 3
-    int contador = 3;
+    int i;
 
-    // Hago un bucle while que se repita hasta que el valor de la variable contador sea mayor A 100
-    while (contador < 100)
-    {
-
-        // Imprimo por pantalla el valor de contador
-        printf("%i\n", contador);
-
-        // La serie va de 3 en 3 por lo que a cada iteracion del bucle, el valor de contador le tengo que sumar de a 3
-        contador = contador + 3;
+    // Hago un for del 0 al 100
+    for (i = 0; i <= 100; i++)
+    {   
+        // Si el numero es multiplo de 2 y de 3 escribo ese numero
+        if (i % 2 == 0 && i % 3 == 0)
+        {
+            printf("%i\n", i);
+        }
+        else if (i % 3 == 0)  // Si el numero es multiplo de 3 escribo ese numero
+        {
+            printf("%i\n", i);
+        }
+        else if (i % 2 == 0)  // Si el numero es multiplo de 2 escribo ese numero
+        {
+            printf("%i\n", i);
+        }
     }
 
-    printf("Fin del programa");
     return 0;
 }

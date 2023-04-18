@@ -2,22 +2,22 @@
 
 int main(int argc, char const *argv[])
 {
-    // DISEÑAR UN ALGORITMO QUE IMPRIMA Y SUME LA SERIE DE NUMEROS 3,6,9,12...99
+    // HACER EL ALGORITMO QUE IMPRIMA TODOS LOS NÚMEROS NATURALES QUE HAY DESDE LA UNIDAD HASTA UN NÚMERO QUE INTRODUCIMOS POR TECLADO. 
 
     // Declaro mi variable contador y la inicializo en 3
-    int contador = 3;
+    int i;
+    int numero;
 
-    // Hago un bucle while que se repita hasta que el valor de la variable contador sea mayor A 100
-    while (contador < 100)
+    // Ingreso el valor de numero por teclado
+    printf("Ingrese un numero: ");
+    scanf(" %i", &numero);
+
+    // Hago el bucle for
+    for (i = 1; i <= numero; i++)
     {
-
-        // Imprimo por pantalla el valor de contador
-        printf("%i\n", contador);
-
-        // La serie va de 3 en 3 por lo que a cada iteracion del bucle, el valor de contador le tengo que sumar de a 3
-        contador = contador + 3;
+        printf("%i\n", i);
     }
-
-    printf("Fin del programa");
+    
+    
     return 0;
 }
