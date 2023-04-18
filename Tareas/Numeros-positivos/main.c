@@ -6,7 +6,7 @@ int main(int argc, char const *argv[])
 
     // Determino las variables
     float numero;
-    int contador_numeros_positivos;
+    int contador_numeros_positivos = 0;
 
     // Ingreso los valores de base y altura por teclado
 
