@@ -50,6 +50,7 @@ int main(int argc, char const *argv[])
         scanf(" %c", &respuesta);
     }
 
+    //Muestro los resultados por pantalla
     printf("En la empresa %i mujeres ganan mas de $16000\n", contador_sueldo_femenino);
     printf("En la empresa %i hombres ganan menos de $10000\n", contador_sueldo_masculino);
 
