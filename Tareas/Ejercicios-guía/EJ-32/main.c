@@ -45,7 +45,7 @@ int main(int argc, char const *argv[])
             contador_sueldo_masculino = contador_sueldo_masculino + 1;
         }
 
-        // Pregunto si quiero seguir con el programa
+        // Pregunto si quiero seguir con el programa para seguir iterando o no
         printf("Desea seguir con el programa?: ");
         scanf(" %c", &respuesta);
     }
