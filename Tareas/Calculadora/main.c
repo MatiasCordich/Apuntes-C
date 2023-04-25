@@ -6,7 +6,7 @@ int main(int argc, char const *argv[])
     // HACER UNA CALCULADORA QUE MUESTRE LAS SIGUIENTES OPERACIONES: SUMA, RESTA, MULTIPLICACION, DIVISON, RESTO
 
     // Determino las variables
-    int num_a;
+       int num_a;
     int num_b;
     int suma;
     int resta;
@@ -28,8 +28,13 @@ int main(int argc, char const *argv[])
     {
         // Ingreso las valores de la variables por teclado
         printf("---------------------- INGRESO DE DATOS ----------------------\n");
-        printf("Ingrese un primer numero: ");
-        scanf(" %i", &num_a);
+        if(respuesta_2 == 's' || respuesta_2 == 'S'){
+            num_a = guardar_resultado;
+        } else {
+            printf("Ingrese un primer numero: ");
+            scanf(" %i", &num_a);
+        }
+        
         printf("Ingrese un segundo numero: ");
         scanf(" %i", &num_b);
         printf("---------------------- INGRESO DE OPERACIONES ----------------------\n");
@@ -51,11 +56,10 @@ int main(int argc, char const *argv[])
             // Si mi respuesta_2 de seguir operando con el numero guardado es 's' o 'S' hago lo siguiente
             if (respuesta_2 == 's' || respuesta_2 == 'S')
             {
-
                 // Realizo la operacion que elegi agregandole como termino el resultado guardado
-                suma = guardar_resultado + num_a + num_b;
+                suma = num_a + num_b;
                 printf("---------------------- RESPUESTA ----------------------\n");
-                printf("La suma de %i + %i + %i es %i\n", guardar_resultado, num_a, num_b, suma);
+                printf("La suma de %i + %i es %i\n", num_a, num_b, suma);
                 guardar_resultado = suma;
             }
             else
@@ -72,9 +76,9 @@ int main(int argc, char const *argv[])
         case 2:
             if (respuesta_2 == 's' || respuesta_2 == 'S')
             {
-                resta = guardar_resultado - num_a - num_b;
+                resta = num_a - num_b;
                 printf("---------------------- RESPUESTA ----------------------\n");
-                printf("La resta de %i - %i - %i es %i\n", guardar_resultado, num_a, num_b, resta);
+                printf("La resta de %i - %i es %i\n", num_a, num_b, resta);
                 guardar_resultado = resta;
             }
             else
@@ -90,9 +94,9 @@ int main(int argc, char const *argv[])
         case 3:
             if (respuesta_2 == 's' || respuesta_2 == 'S')
             {
-                multiplicacion = guardar_resultado * num_a * num_b;
+                multiplicacion = num_a * num_b;
                 printf("---------------------- RESPUESTA ----------------------\n");
-                printf("La multiplicacion de %i * %i * %i es %i\n", guardar_resultado, num_a, num_b, multiplicacion);
+                printf("La multiplicacion de %i * %i es %i\n", num_a, num_b, multiplicacion);
                 guardar_resultado = multiplicacion;
             }
             else
@@ -120,9 +124,9 @@ int main(int argc, char const *argv[])
                 }
                 else // Caso contrario hago todas las operaciones con el ultimo resultado guardado
                 {
-                    division = guardar_resultado / (num_a / num_b);
+                    division = num_a / num_b;
                     printf("---------------------- RESPUESTA ----------------------\n");
-                    printf("La division de de %i / (%i / %i) es %i \n", guardar_resultado, num_a, num_b, division);
+                    printf("La division de de %i / %i es %i \n", num_a, num_b, division);
                     guardar_resultado = division;
                 }
             }
@@ -147,9 +151,9 @@ int main(int argc, char const *argv[])
         case 5:
             if (respuesta_2 == 's' || respuesta_2 == 'S')
             {
-                resto = guardar_resultado % (num_a % num_b);
+                resto = num_a % num_b;
                 printf("---------------------- RESPUESTA ----------------------\n");
-                printf("El resto de %i entre (%i y %i) es %i\n", guardar_resultado, num_a, num_b, resto);
+                printf("El resto de %i y %i es %i\n",num_a, num_b, resto);
                 guardar_resultado = resto;
             }
             else
