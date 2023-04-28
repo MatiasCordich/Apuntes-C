@@ -11,7 +11,7 @@ int main(int argc, char const *argv[])
             E = 2*B + 4*C + 6*D +5) MOD 7
             N = (22 + D + E)
         EN EL QUE N INDICA EL NÚMERO DEL DÍA DE MARZO (O ABRIL SI N > 31) CORRESPONDIENTE AL DOMINGO DE PASCUA.
-        REALIZAR UN PROGRAMA QUE CALCULE ESA FECHA PARA LOS AÑOS 2018 Y 2019.
+        REALIZAR UN PROGRAMA QUE CALCULE ESA FECHA PARA LOS AÑOS 2018 Y 2019. y 2022
     */
 
     // Int declaro mis variables
