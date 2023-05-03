@@ -5,9 +5,9 @@ int main(int argc, char const *argv[])
     // ÍDEM AL ANTERIOR AGREGANDO EN EL INFORME FINAL NOMBRE DEL EMPLEADO DE MAYOR SALARIO CON EL MONTO DEL SALARIO CORRESPONDIENTE Y NOMBRE DEL EMPLEADO DE MENOR SALARIO CON EL MONTO DEL SALARIO CORRESPONDIENTE.
 
     // Declaro mis variables
-    char nombre_empleado[50];
-    char nombre_empleado_mayor_salario[50];
-    char nombre_empleado_menor_salario[50];
+    char nombre_empleado;
+    char nombre_empleado_mayor_salario;
+    char nombre_empleado_menor_salario;
     char respuesta;
     int salario_semanal;
     int salario_semanal_anterior;
@@ -26,7 +26,7 @@ int main(int argc, char const *argv[])
 
         // Ingreso el nommbre del empleado
         printf("Ingresar el nombre del empleado: ");
-        scanf(" %s", nombre_empleado);
+        scanf(" %c", &nombre_empleado);
 
         // Ingreso la tarifa horaria
         printf("Ingresar la tarifa horaria del empleado: ");
@@ -47,8 +47,8 @@ int main(int argc, char const *argv[])
         if (cant_empleados == 1)
         {
             // El primer empleado es el que tiene el mayor y menor salario semanal
-            nombre_empleado_mayor_salario[50] = nombre_empleado;
-            nombre_empleado_menor_salario[50] = nombre_empleado;
+            nombre_empleado_mayor_salario = nombre_empleado;
+            nombre_empleado_menor_salario = nombre_empleado;
             mayor_salario = salario_semanal;
             menor_salario = salario_semanal;
         }
@@ -58,20 +58,20 @@ int main(int argc, char const *argv[])
 
             if (salario_semanal > salario_semanal_anterior)
             {
-                nombre_empleado_mayor_salario[50] = nombre_empleado;
+                nombre_empleado_mayor_salario = nombre_empleado;
                 mayor_salario = salario_semanal;
             }
 
             if (salario_semanal < salario_semanal_anterior)
             {
-                nombre_empleado_menor_salario[50] = nombre_empleado;
+                nombre_empleado_menor_salario = nombre_empleado;
                 menor_salario = salario_semanal;
             }
         }
 
         // Muestro por pantalla los datos del empleado actual
         printf("-----------------\n");
-        printf("EMPLEADO: %s\n", nombre_empleado);
+        printf("EMPLEADO: %c\n", nombre_empleado);
         printf("SALARIO SEMANAL: %i\n", salario_semanal);
         printf("-----------------\n");
 
@@ -89,10 +89,10 @@ int main(int argc, char const *argv[])
 
     printf("-----------------\n");
     printf("----- EMPLEADO CON MAYOR SUELDO SEMANAL -----\n");
-    printf("NOBMRE: %s\n", nombre_empleado_mayor_salario);
+    printf("NOBMRE: %c\n", nombre_empleado_mayor_salario);
     printf("SALARIO SEMANAL: %i\n", mayor_salario);
     printf("----- EMPLEADO CON MENOR SUELDO SEMANAL -----\n");
-    printf("NOBMRE: %s\n", nombre_empleado_menor_salario);
+    printf("NOBMRE: %c\n", nombre_empleado_menor_salario);
     printf("SALARIO SEMANAL: %i\n", menor_salario);
     printf("-----------------\n");
 

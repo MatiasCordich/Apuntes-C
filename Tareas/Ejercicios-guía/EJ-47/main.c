@@ -35,17 +35,17 @@ int main(int argc, char const *argv[])
     e = (2*b + 4*c + 6*d +5) % 7;
     n = (22 + d + e);
 
-    // Indico en que dia de abril o marzo cayo pascua dependiendo del resultado 
+    // Indico en que dia de abril o marzo cayo pascua dependiendo del resultado que obtengamos
 
     // Si n me da mayor a 31
     if (n <=31)
     {
         // La fecha de pascua es en marzo y escribo por pantalla el dia que cayo con el anio
-        printf("El anio %i de pascua cayo el dia %i de marzo", anio, n);
+        printf("El anio %i de pascua cayo el dia %i de marzo.", anio, n);
     } else {
         // Si es mayor a 31, la pascua en en abril y escribo por pantalla el dia que cayo con el anio
         // Como n es mayor a 31 (es decir 32 o mas) tengo que restarle 31. 
-        printf("El anio %i de pascua cayo el dia %i de abril", anio, n-31);
+        printf("El anio %i de pascua cayo el dia %i de abril.", anio, n-31);
     }
     
 
