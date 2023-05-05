@@ -22,6 +22,7 @@ int main(int argc, char const *argv[])
         // Evaluo maximo y minimos
         if (i == 0)
         {
+            // La primera iteracion seran tanto maximos y minimos porque no hay con que comparar
             num_mayor = num;
             num_menor = num;
         }
