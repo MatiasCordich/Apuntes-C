@@ -14,42 +14,39 @@ int main(int argc, char const *argv[])
 
     // Realizo el bucle que se realizara mientras el valor de la variable respuesta sea 's'
     while (respuesta == 's')
-    {   
+    {
         // Ingreso un valor del 1 al 7 que sera guardo en la variable numero
         printf("Ingrese un numero del 1 al 7: ");
         scanf("%i", &numero);
 
         // Evaluo el valor de la variable numero y base a la evulacion muestro por pantalla un dia de la semana
-        if (numero == 1)
+
+        switch (numero)
         {
+        case 1:
             printf("LUNES\n");
-        }
-        else if (numero == 2)
-        {
+            break;
+        case 2:
             printf("MARTES\n");
-        }
-        else if (numero == 3)
-        {
+            break;
+        case 3:
             printf("MIERCOLES\n");
-        }
-        else if (numero == 4)
-        {
+            break;
+        case 4:
             printf("JUEVES\n");
-        }
-        else if (numero == 5)
-        {
+            break;
+        case 5:
             printf("VIERNES\n");
-        }
-        else if (numero == 6)
-        {
+            break;
+        case 6:
             printf("SABADO\n");
-        }
-        else if (numero == 7)
-        {
+            break;
+        case 7:
             printf("DOMINGO\n");
-        }
-        else {
-            printf("ERROR: INGRESE UN NUMERO DENTRO DEL CAMPO ESTABLECIDO\n");
+            break;
+        default:
+             printf("ERROR: INGRESE UN NUMERO DENTRO DEL CAMPO ESTABLECIDO\n");
+            break;
         }
 
         // Pregunto por pantalla si deseo seguir continuando con el programa y guardo ese valor en la variable respuesta
@@ -62,6 +59,5 @@ int main(int argc, char const *argv[])
     // Si el valor ingresado es 'n' se salta el ciclo y me trae hasta aca que es el fin del codigo
     printf("Fin del programa");
 
-    
     return 0;
 }
