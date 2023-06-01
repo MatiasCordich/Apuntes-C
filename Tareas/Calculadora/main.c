@@ -1,12 +1,36 @@
 #include <stdio.h>
 
+double sumar (double num1, double num2){
+    double resultado;
+    resultado = num1 + num2;
+    return resultado;
+}
+
+double restar (double num1, double num2){
+    double resultado;
+    resultado = num1 - num2;
+    return resultado;
+}
+
+double multiplicar (double num1, double num2){
+    double resultado;
+    resultado = num1 * num2;
+    return resultado;
+}
+
+double dividir (double num1, double num2){
+    double resultado;
+    resultado = num1 / num2;
+    return resultado;
+}
+
 int main(int argc, char const *argv[])
 {
 
     // HACER UNA CALCULADORA QUE MUESTRE LAS SIGUIENTES OPERACIONES: SUMA, RESTA, MULTIPLICACION, DIVISON, RESTO
 
     // Determino las variables
-       int num_a;
+    int num_a;
     int num_b;
     int suma;
     int resta;
