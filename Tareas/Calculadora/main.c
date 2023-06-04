@@ -1,5 +1,26 @@
+/*
+-------- TRABAJADO INTEGRADOR FINAL --------
+Fecha
+Autores
+Materia: Progrmacion I (C)
+----------------------------------
+Universidad Nacional de Lomas de Zamora
+----------------------------------
+-------- CALCULADORA --------
+Objetivo:
+    Realizar un programa el cual cumpla las funcionalidades de una calculadora
+
+Requisitos:
+    1- Se debe permitir sumar, restar, dividir, multiplicar, realizar potencia, realizar raiz cuadrada y realizar funcionalidades trigonométricas (seno, coseno y tangente).
+    2- El usuario debe poder realizar operaciones repetitivamente hasta que el mismo lo decida, por medio de alguna señal.
+    3- Luego de realizar una operación, deberá permitir al usuario elegir si se seguirá operando con el valor anterior, o empezar de cero.
+    4- Debe existir una operación para ver un listado de todas las operaciones realizados con su resultado. (Max 100, ordenadas de la más reciente a la más vieja).
+*/
+
 #include <stdio.h>
 #include <math.h>
+
+// Defino mis funciones que me permiten realizar las operaciones aritméticas basicas.
 
 double sumar(double num1, double num2)
 {
@@ -29,47 +50,35 @@ double dividir(double num1, double num2)
     return resultado;
 }
 
+// Función principal del programa
 int main(int argc, char const *argv[])
 {
 
-    // HACER UNA CALCULADORA QUE MUESTRE LAS SIGUIENTES OPERACIONES: SUMA, RESTA, MULTIPLICACION, DIVISON, RESTO
-
-    // Determino las variables
-    double num_a;
-    double num_b;
-    double resultado;
-    double resultados[100];
-    double guardar_resultado;
-    int i;
-    int operacion;
-    int cant_elementos = 0;
-    char respuesta;
-    char respuesta_2 = 'n';
-    char respuesta_3;
+    // Defino mis variables
+    double valor_1;         // Representa el primer valor de la operacion
+    double valor_2;         // Representa el segundo valor de la operacion
+    double resultado;       // Representa resultado de la operacion
+    double resultados[100]; // Representa un vector de resultados guardados por las operaciones realizadas
+    int i;                  // Representa el numero de iteraciones para poder recorrer el vector resultados
+    int cont_salida = 1;    // Representa un contador de salida
+    int operacion;          // Representa la operacion a realizar por medio de un numero del 1 al 9
+    int cant_elementos = 0; // Representa la cantidad de elementos que va a poseer el vector resultados (vector parcial)
+    char respuesta_1;       // Representa la respuesta de si desea comenzar con el programa
+    char respuesta_2;       // Representa la respuesta de si desea seguir operando con el ultimo resultado
+    char respuesta_3;       // Representa la respuesta de si desea mostrar todos los resultados hechos
 
     // Ingreso un valor para respuesta para determinar si voy a bucle o no
     printf("---------------------- CALCULADORA ----------------------\n");
-    printf("Bienvenido/a, desea comenzar con la calculadora? s/n: ");
-    scanf("%c", &respuesta);
+    printf("Bienvenido/a a la calculadora, desea comenzar con el programa? s/n: ");
+    scanf("%c", &respuesta_1);
+    printf("---------------------------------------------------------\n");
 
-    // Si respuesta es 's' o 'S' se entra al bucle
-    while (respuesta == 's' || respuesta == 'S')
+    // Si respuesta_1 es 's' o 'S' se entra al bucle
+    while (respuesta_1 == 's' || respuesta_1 == 'S')
     {
-        // Ingreso las valores de la variables por teclado
-        printf("---------------------- INGRESO DE DATOS ----------------------\n");
-        if (respuesta_2 == 's' || respuesta_2 == 'S')
-        {
-            num_a = guardar_resultado;
-        }
-        else
-        {
-            printf("Ingrese un primer numero: ");
-            scanf(" %lf", &num_a);
-        }
 
-        printf("Ingrese un segundo numero: ");
-        scanf(" %lf", &num_b);
-        printf("---------------------- INGRESO DE OPERACIONES ----------------------\n");
+        // Menú de operaciones
+        printf("---------------------- MENU DE OPERACIONES ----------------------\n");
         printf("SUMA : 1\n");
         printf("RESTA : 2\n");
         printf("MULTIPLICACION : 3\n");
@@ -79,265 +88,264 @@ int main(int argc, char const *argv[])
         printf("SENO : 7\n");
         printf("COSENO : 8\n");
         printf("TANGENTE : 9\n");
+        printf("-----------------------------------------------------------------\n");
+
+        // Ingreso un numero para poder determinar que operacion realizar que se guardara en la variable operacion
         printf("Ingrese la operacion que desea realizar (1,2,3,4,5,6,7,8,9): ");
         scanf(" %i", &operacion);
 
-        // Realizo un switch para evaluar las multiples opciones que tengo
+        // Realizo un switch para evaluar las mpltiples opciones que tengo
         switch (operacion)
         {
+        case 1: // Si operacion es igual a 1 SUMO
 
-        // Si operacion es igual a 1 SUMO
-        case 1:
-
-            // Si mi respuesta_2 de seguir operando con el numero guardado es 's' o 'S' hago lo siguiente
-            if (respuesta_2 == 's' || respuesta_2 == 'S')
+            printf("---------------------- INGRESO DE DATOS ----------------------\n");
+            // Me toma primero la variable cont_salida que es 1, despues me tomará la condicion del valor de respuesta_2 si debo ingresar o no un valor para valor_1
+            if (cont_salida == 1 || respuesta_2 == 'n' || respuesta_2 == 'n')
             {
-                // Realizo la operacion que elegi agregandole como termino el resultado guardado
-                resultado = sumar(num_a, num_b);
-                printf("---------------------- RESPUESTA ----------------------\n");
-                printf("La suma de %.1lf + %.1lf es %.1lf\n", num_a, num_b, resultado);
-                guardar_resultado = resultado;
-                resultados[cant_elementos] = resultado;
-                cant_elementos = cant_elementos + 1;
+                // Ingreso un valor para valor_1
+                printf("Ingrese el primer numero: ");
+                scanf(" %lf", &valor_1);
             }
-            else
+
+            // Ingreso un valor para valor_2
+            printf("Ingrese el segundo numero: ");
+            scanf(" %lf", &valor_2);
+
+            // Realizo la operacion llmando la funcion sumar() en base a los valores de valor_1 y valor_2 y el resultado se guarda en la variable resultado
+            resultado = sumar(valor_1, valor_2);
+
+            // Muestro el resultado por pantalla
+            printf("---------------------- RESPUESTA ----------------------\n");
+            printf("La suma de %.2lf + %.2lf es %.2lf\n", valor_1, valor_2, resultado);
+
+            // Guardo ese resultado en el vector de resultados trabajando de manera parcial con el vector
+            resultados[cant_elementos] = resultado;
+            cant_elementos = cant_elementos + 1;
+
+            break;
+
+        case 2: // Si operacion es igual a 2 RESTO
+            printf("---------------------- INGRESO DE DATOS ----------------------\n");
+            if (cont_salida == 1 || respuesta_2 == 'n' || respuesta_2 == 'N')
             {
-                // Si decido no seguir operanando con el ultimo resultado guardado entonces hago una operacion nueva
-                resultado = sumar(num_a, num_b);
+                printf("Ingrese el primer numero: ");
+                scanf(" %lf", &valor_1);
+            }
+
+            printf("Ingrese el segundo numero: ");
+            scanf(" %lf", &valor_2);
+
+            // Realizo la operacion llmando la funcion restar() en base a los valores de valor_1 y valor_2 y el resultado se guarda en la variable resultado
+            resultado = restar(valor_1, valor_2);
+
+            printf("---------------------- RESPUESTA ----------------------\n");
+            printf("La resta de %.2lf - %.2lf es %.2lf\n", valor_1, valor_2, resultado);
+
+            resultados[cant_elementos] = resultado;
+            cant_elementos = cant_elementos + 1;
+
+            break;
+
+        case 3: // Si operacion es igual a 3 MULTIPLICO
+            printf("---------------------- INGRESO DE DATOS ----------------------\n");
+            if (cont_salida == 1 || respuesta_2 == 'n' || respuesta_2 == 'N')
+            {
+                printf("Ingrese el primer numero: ");
+                scanf(" %lf", &valor_1);
+            }
+
+            printf("Ingrese el segundo numero: ");
+            scanf(" %lf", &valor_2);
+            // Realizo la operacion llmando la funcion multiplicar() en base a los valores de valor_1 y valor_2 y el resultado se guarda en la variable resultado
+            resultado = multiplicar(valor_1, valor_2);
+
+            printf("---------------------- RESPUESTA ----------------------\n");
+            printf("El producto de %.2lf x %.2lf es %.2lf\n", valor_1, valor_2, resultado);
+
+            resultados[cant_elementos] = resultado;
+            cant_elementos = cant_elementos + 1;
+            break;
+
+        case 4: // Si operacion es igual a 4 DIVIDO
+            printf("---------------------- INGRESO DE DATOS ----------------------\n");
+
+            if (cont_salida == 1 || respuesta_2 == 'n' || respuesta_2 == 'N')
+            {
+                printf("Ingrese el primer numero: ");
+                scanf(" %lf", &valor_1);
+            }
+
+            printf("Ingrese el segundo numero: ");
+            scanf(" %lf", &valor_2);
+
+            // Verifico si el segundo valor, valor_2, no es cero porque no se puede dividir por 0
+            if (valor_2 == 0)
+            {
+                printf("ERROR!!!! NO SE PUEDE DIVIDIR POR 0\n");
+            }
+            else // Si no es cero entonces procedo con la operación
+            {
+                // Realizo la operacion llmando la funcion dividir() en base a los valores de valor_1 y valor_2 y el resultado se guarda en la variable resultado
+                resultado = dividir(valor_1, valor_2);
+
                 printf("---------------------- RESPUESTA ----------------------\n");
-                printf("La suma de %.1lf + %.1lf es %.1lf\n", num_a, num_b, resultado);
-                guardar_resultado = resultado;
+                printf("La division de %.2lf / %.2lf es %.2lf\n", valor_1, valor_2, resultado);
+
                 resultados[cant_elementos] = resultado;
                 cant_elementos = cant_elementos + 1;
             }
 
             break;
-            // Si operacion es igual a 2 RESTO
-        case 2:
-            if (respuesta_2 == 's' || respuesta_2 == 'S')
+
+        case 5: // Si operacion es igual a 5 POTENCIA
+            printf("---------------------- INGRESO DE DATOS ----------------------\n");
+            if (cont_salida == 1 || respuesta_2 == 'n' || respuesta_2 == 'N')
             {
-                resultado = restar(num_a, num_b);
-                printf("---------------------- RESPUESTA ----------------------\n");
-                printf("La resta de %.1lf - %.1lf es %.1lf\n", num_a, num_b, resultado);
-                guardar_resultado = resultado;
-                resultados[cant_elementos] = resultado;
-                cant_elementos = cant_elementos + 1;
+                printf("Ingrese el primer numero: ");
+                scanf(" %lf", &valor_1);
             }
-            else
+
+            printf("Ingrese el segundo numero: ");
+            scanf(" %lf", &valor_2);
+
+            // Realizo la operacion utilizando la funcion pow(), de la libreria math.h, en base a los valores de valor_1 y valor_2 y el resultado se guarda en la variable resultado
+            resultado = pow(valor_1, valor_2);
+
+            printf("---------------------- RESPUESTA ----------------------\n");
+            printf("La potencia de %.2lf elevando a %.2lf es %.2lf\n", valor_1, valor_2, resultado);
+
+            resultados[cant_elementos] = resultado;
+            cant_elementos = cant_elementos + 1;
+
+            break;
+
+        case 6: // Si operacion es igual a 6 RAIZ CUADRADA
+            printf("---------------------- INGRESO DE DATOS ----------------------\n");
+            if (cont_salida == 1 || respuesta_2 == 'n' || respuesta_2 == 'N')
             {
-                resultado = restar(num_a, num_b);
+                printf("Ingrese un numero para realizar su raiz cuadrada: ");
+                scanf(" %lf", &valor_1);
+            }
+
+            // Si valor_1 es menor a cero (negativo) lanzo un mensaje de error que no se puede sacar raíz cuadra de un numero
+            if (valor_1 < 0)
+            {
+                printf("ERROR!!! NO SE PUEDE INGRESAR UN NUMERO MENOR A 0 PARA RAIZ CUADRADA\n");
+            }
+            else // Caso contrario procedo con la operacion
+            {
+                // Realizo la operacion utilizando la funcion sqrt(), de la libreria math.h, en base al valor de valor_1 y el resultado se guarda en la variable resultado
+                resultado = sqrt(valor_1);
+
                 printf("---------------------- RESPUESTA ----------------------\n");
-                printf("La resta de %.1lf - %.1lf es %.1lf\n", num_a, num_b, resultado);
-                guardar_resultado = resultado;
+                printf("La raiz cuadrada de %.2lf es %.2lf\n", valor_1, resultado);
+
                 resultados[cant_elementos] = resultado;
                 cant_elementos = cant_elementos + 1;
             }
 
             break;
-            // Si operacion es igual a 3 MULTIPLICO
-        case 3:
-            if (respuesta_2 == 's' || respuesta_2 == 'S')
-            {
-                resultado = multiplicar(num_a, num_b);
-                printf("---------------------- RESPUESTA ----------------------\n");
-                printf("La multiplicacion de %.1lf * %.1lf es %.1lf\n", num_a, num_b, resultado);
-                guardar_resultado = resultado;
-                resultados[cant_elementos] = resultado;
-                cant_elementos = cant_elementos + 1;
-            }
-            else
-            {
-                resultado = multiplicar(num_a, num_b);
-                printf("---------------------- RESPUESTA ----------------------\n");
-                printf("La multiplicacion de %.1lf * %.1lf es %.1lf\n", num_a, num_b, resultado);
-                guardar_resultado = resultado;
-                resultados[cant_elementos] = resultado;
-                cant_elementos = cant_elementos + 1;
-            }
-            break;
-            // Si operacion es igual a 4 DIVIDO
-        case 4:
 
-            // Si decido que sigo operando con el resutlado guardado tengo que hacer lo siguiente
-            if (respuesta_2 == 's' || respuesta_2 == 'S')
+        case 7: // Si operacion es igual a 7 SENO
+            printf("---------------------- INGRESO DE DATOS ----------------------\n");
+            if (cont_salida == 1 || respuesta_2 == 'n' || respuesta_2 == 'N')
             {
-                // La operacion sera (guardar_resultado / (num_a / num_b))
-                // Tanto num_a como num_b no pueden ser cero porque si num_b es 0 no podre hacer la operacion interna de (num_a / num_b)
-                // Si num_a es 0 podre hacer la operacion interna pero me dara cero 0 y a la hora de hacer la operacion externa con gardar_resultado sera guardar_resultado / 0
-                // Por lo que me dara error poque no se puede dividir por 0
-                if (num_a == 0 || num_b == 0)
-                {
-                    printf("---------------------- RESPUESTA ----------------------\n");
-                    printf("ERROR: No se puede divir por cero 0\n");
-                }
-                else // Caso contrario hago todas las operaciones con el ultimo resultado guardado
-                {
-                    resultado = dividir(num_a, num_b);
-                    printf("---------------------- RESPUESTA ----------------------\n");
-                    printf("La division de %.1lf / %.1lf es %.1lf\n", num_a, num_b, resultado);
-                    guardar_resultado = resultado;
-                    resultados[cant_elementos] = resultado;
-                    cant_elementos = cant_elementos + 1;
-                }
-            }
-            else
-            {
-                if (num_b == 0)
-                {
-                    printf("---------------------- RESPUESTA ----------------------\n");
-                    printf("ERROR: No se puede divir por cero 0\n");
-                }
-                else
-                {
-                    resultado = dividir(num_a, num_b);
-                    printf("---------------------- RESPUESTA ----------------------\n");
-                    printf("La division de %.1lf / %.1lf es %.1lf\n", num_a, num_b, resultado);
-                    guardar_resultado = resultado;
-                    resultados[cant_elementos] = resultado;
-                    cant_elementos = cant_elementos + 1;
-                }
+                printf("Ingrese un numero para realizar el seno: ");
+                scanf(" %lf", &valor_1);
             }
 
-            break;
-            // Si operacion es igual a 5 POTENCIA
-        case 5:
-            if (respuesta_2 == 's' || respuesta_2 == 'S')
-            {
-                resultado = pow(num_a, num_b);
-                printf("---------------------- RESPUESTA ----------------------\n");
-                printf("%.1lf elevado a la %.1lf es %.1lf\n", num_a, num_b, resultado);
-                guardar_resultado = resultado;
-                resultados[cant_elementos] = resultado;
-                cant_elementos = cant_elementos + 1;
-            }
-            else
-            {
-                resultado = pow(num_a, num_b);
-                printf("---------------------- RESPUESTA ----------------------\n");
-                printf("%.1lf elevado a la %.1lf es %.1lf\n", num_a, num_b, resultado);
-                guardar_resultado = resultado;
-                resultados[cant_elementos] = resultado;
-                cant_elementos = cant_elementos + 1;
-            }
+            // Realizo la operacion utilizando la funcion sin(), de la libreria math.h, en base al valor de valor_1 y el resultado se guarda en la variable resultado
+            resultado = sin(valor_1);
+
+            printf("---------------------- RESPUESTA ----------------------\n");
+            printf("El seno de %.2lf es %.2lf\n", valor_1, resultado);
+
+            resultados[cant_elementos] = resultado;
+            cant_elementos = cant_elementos + 1;
 
             break;
-            // Si operacion es igual a 6 RAIZ CUADRADA
-        case 6:
-            if (respuesta_2 == 's' || respuesta_2 == 'S')
+
+        case 8: // Si operacion es igual a 8 COSENO
+            printf("---------------------- INGRESO DE DATOS ----------------------\n");
+            if (cont_salida == 1 || respuesta_2 == 'n' || respuesta_2 == 'N')
             {
-                resultado = sqrt(num_a);
-                printf("---------------------- RESPUESTA ----------------------\n");
-                printf("La raiz cuadrada de %.1lf es %.1lf\n", num_a, resultado);
-                guardar_resultado = resultado;
-                resultados[cant_elementos] = resultado;
-                cant_elementos = cant_elementos + 1;
-            }
-            else
-            {
-                resultado = sqrt(num_a);
-                printf("---------------------- RESPUESTA ----------------------\n");
-                printf("La raiz cuadrada de %.1lf es %.1lf\n", num_a, resultado);
-                guardar_resultado = resultado;
-                resultados[cant_elementos] = resultado;
-                cant_elementos = cant_elementos + 1;
+                printf("Ingrese un numero para realizar el coseno: ");
+                scanf(" %lf", &valor_1);
             }
 
-            break;
-            // Si operacion es igual a 7 SENO
-        case 7:
-            if (respuesta_2 == 's' || respuesta_2 == 'S')
-            {
-                resultado = sin(num_a);
-                printf("---------------------- RESPUESTA ----------------------\n");
-                printf("El seno de %.1lf es %.1lf\n", num_a, resultado);
-                guardar_resultado = resultado;
-                resultados[cant_elementos] = resultado;
-                cant_elementos = cant_elementos + 1;
-            }
-            else
-            {
-                resultado = sin(num_a);
-                printf("---------------------- RESPUESTA ----------------------\n");
-                printf("El seno de %.1lf es %.1lf\n", num_a, resultado);
-                guardar_resultado = resultado;
-                resultados[cant_elementos] = resultado;
-                cant_elementos = cant_elementos + 1;
-            }
+            // Realizo la operacion utilizando la funcion cos(), de la libreria math.h, en base al valor de valor_1 y el resultado se guarda en la variable resultado
+            resultado = cos(valor_1);
+
+            printf("---------------------- RESPUESTA ----------------------\n");
+            printf("El coseno de %.2lf es %.2lf\n", valor_1, resultado);
+
+            resultados[cant_elementos] = resultado;
+            cant_elementos = cant_elementos + 1;
 
             break;
-            // Si operacion es igual a 8 COSENO
-        case 8:
-            if (respuesta_2 == 's' || respuesta_2 == 'S')
+
+        case 9: // Si operacion es igual a 9 TANGENTE
+            printf("---------------------- INGRESO DE DATOS ----------------------\n");
+            if (cont_salida == 1 || respuesta_2 == 'n' || respuesta_2 == 'N')
             {
-                resultado = cos(num_a);
-                printf("---------------------- RESPUESTA ----------------------\n");
-                printf("El coseno de %.1lf es %.1lf\n", num_a, resultado);
-                guardar_resultado = resultado;
-                resultados[cant_elementos] = resultado;
-                cant_elementos = cant_elementos + 1;
-            }
-            else
-            {
-                resultado = cos(num_a);
-                printf("---------------------- RESPUESTA ----------------------\n");
-                printf("El coseno de %.1lf es %.1lf\n", num_a, resultado);
-                guardar_resultado = resultado;
-                resultados[cant_elementos] = resultado;
-                cant_elementos = cant_elementos + 1;
+                printf("Ingrese un numero para realizar la tangente: ");
+                scanf(" %lf", &valor_1);
             }
 
-            break;
-            // Si operacion es igual a 9 TANGENTE
-        case 9:
-            if (respuesta_2 == 's' || respuesta_2 == 'S')
-            {
-                resultado = tan(num_a);
-                printf("---------------------- RESPUESTA ----------------------\n");
-                printf("La tangente de %.1lf es %.1lf\n", num_a, resultado);
-                guardar_resultado = resultado;
-                resultados[cant_elementos] = resultado;
-                cant_elementos = cant_elementos + 1;
-            }
-            else
-            {
-                resultado = tan(num_a);
-                printf("---------------------- RESPUESTA ----------------------\n");
-                printf("La tangente de %.1lf es %.1lf\n", num_a, resultado);
-                guardar_resultado = resultado;
-                resultados[cant_elementos] = resultado;
-                cant_elementos = cant_elementos + 1;
-            }
+            // Realizo la operacion utilizando la funcion tan(), de la libreria math.h, en base al valor de valor_1 y el resultado se guarda en la variable resultado
+            resultado = tan(valor_1);
+
+            printf("---------------------- RESPUESTA ----------------------\n");
+            printf("La tangente de %.2lf es %.2lf\n", valor_1, resultado);
+
+            resultados[cant_elementos] = resultado;
+            cant_elementos = cant_elementos + 1;
 
             break;
-            // Si operacion NO es ningun ninguno de los anteriores tiro un mensaje de ERROR
-        default:
+
+        default: // Si operacion NO es ningun ninguno de los anteriores tiro un mensaje de ERROR
             printf("---------------------- RESPUESTA ----------------------\n");
             printf("ERROR: No ingreso una operacion correcta\n");
             break;
         }
 
+        // Primero pregunto si deseo seguir utilizando el programa y el valor se guarda en respuesta_1
         printf("---------------------- INGRESO DE DATOS ----------------------\n");
         printf("Desea seguir utilizando la calculadora? s/n: ");
-        scanf(" %c", &respuesta);
+        scanf(" %c", &respuesta_1);
 
-        if (respuesta == 's' || respuesta == 'S')
+        // Si respuesta_1 es 's' o "S"
+        if (respuesta_1 == 's' || respuesta_1 == 'S')
         {
-            printf("Desea seguir operando con el resultado guardado? s/n: ");
+            // Pregunto si deseo seguir operando con el utlimo resultado
+            printf("Desea seguir operando con el ultimo resultado? s/n: ");
             scanf(" %c", &respuesta_2);
+
+            // Si respuesta_2 es 's' o 'S' valor_1 tomara el valor de la variable resultado
+            if (respuesta_2 == 's' || respuesta_2 == 'S')
+            {
+                valor_1 = resultado;
+            }
+
+            // A parte el valor de respuesta_2 servira para determinar si tengo que ingresar o no un valor para valor_1 cuando tenga que hacer otra operacion
         }
 
+        // Pregunto si deseo mostrar los resultados guardados
         printf("Desea mostrar los resultados guardados? s/n: ");
         scanf(" %c", &respuesta_3);
 
+        // Si respuesta_3 es 's' o 'S'
         if (respuesta_3 == 's' || respuesta_3 == 'S')
         {
             printf("--------- RESULTADOS ---------\n");
             for (i = 0; i < cant_elementos; i++)
             {
-                printf("%.1lf\n",resultados[i]);
+                printf("%.1lf\n", resultados[i]);
             }
-            
         }
+
+        cont_salida = cont_salida + 1;
     }
 
     printf("---------------------- FIN DEL PROGRAMA ----------------------");
