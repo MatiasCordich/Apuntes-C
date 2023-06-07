@@ -84,7 +84,7 @@ int main(int argc, char const *argv[])
 
                 if (personas[i].dni == dni)
                 {
-                    printf("ERROR!!! EL DNI DEBE SER UNICO\n");
+                    printf("ERROR!!! EL DNI DEBE SER UNICO.\n");
                 }
                 else
                 {
