@@ -160,6 +160,8 @@ char menu_salir()
 int main(int argc, char const *argv[])
 {
     char respuesta_1;
+    s_persona persona;
+    s_persona personas[100];
 
     // Ingreso un valor para respuesta para determinar si voy a bucle o no
     printf("---------------------- AGENDA ----------------------\n");
@@ -171,7 +173,9 @@ int main(int argc, char const *argv[])
     {   
         // Menu para ingresar los datos y crear una persona para la agenda
 
-        ingresar_persona();
+        persona = ingresar_persona();
+
+        // Guardo la persona vector personas
 
         // Menu para verificar si seguimos utilizando la agenda 
         respuesta_1 = menu_salir();
