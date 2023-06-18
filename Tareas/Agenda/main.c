@@ -45,7 +45,8 @@ typedef struct
     int telefono;
     s_fecha cumpleanios;
 } s_persona;
-//se declaran las variables globales
+
+//Se declaran las variables globales
 s_persona personas[100];
 int cant_elementos=0;
 
@@ -79,6 +80,7 @@ s_persona construir_persona(char nombre, char apellido, int dni, int telefono, s
 
     return persona_nueva;
 }
+
 //Esta es la funcion que sirve para verificar que el dni no este registrado
 int comparar_dni(s_persona personas[],int cant_elementos)
 {
@@ -236,7 +238,7 @@ void mostrar_nacidos_en_anio (s_persona personas[], int cant_elementos, int anio
     
 } 
 
-
+// Funcion comparadora de fechas de cumpleaños
 int comparar(s_fecha fecha1, s_fecha fecha2){
 
     int resultado = fecha1.anio - fecha2.anio;
