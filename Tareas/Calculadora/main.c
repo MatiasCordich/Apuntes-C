@@ -1,8 +1,12 @@
 /*
 -------- TRABAJADO INTEGRADOR FINAL --------
-Fecha
-Autores
-Materia: Progrmacion I (C)
+Fecha 18/06/2023
+Autores:
+        Alvarez, Alan
+        Buggenthin, Nicolas
+        Olivera, Abril
+        Sio Cordich, Matias
+        Tassara Franco, Santino
 ----------------------------------
 Universidad Nacional de Lomas de Zamora
 ----------------------------------
@@ -20,8 +24,7 @@ Requisitos:
 #include <stdio.h>
 #include <math.h>
 
-// Defino mis funciones que me permiten realizar las operaciones aritméticas basicas.
-
+// Funciones para realizar las operacion aritmeticas básicas
 double sumar(double num1, double num2)
 {
     double resultado;
@@ -50,19 +53,75 @@ double dividir(double num1, double num2)
     return resultado;
 }
 
+// Menu de opciones al ingreso
+int opciones_menu()
+{
+
+    int opcion;
+
+    // Menú de operaciones
+    printf("------------------------- MENU --------------------------\n");
+    printf("SUMA : 1\n");
+    printf("RESTA : 2\n");
+    printf("MULTIPLICACION : 3\n");
+    printf("DIVISION : 4\n");
+    printf("POTENCIA : 5\n");
+    printf("RAIZ CUADRADA : 6\n");
+    printf("SENO : 7\n");
+    printf("COSENO : 8\n");
+    printf("TANGENTE : 9\n");
+    printf("-----------------------------------------------------------------\n");
+
+    // Ingreso un numero para poder determinar que operacion realizar que se guardara en la variable operacion
+    printf("Ingrese la operacion que desea realizar (1,2,3,4,5,6,7,8,9): ");
+    scanf(" %d", &opcion);
+
+    return opcion;
+}
+
+// Menu para preguntar si queremos seguir utilizando el programa
+char menu_salir()
+{
+    char respuesta;
+    printf("---------------------- CALCULADORA ----------------------\n");
+    printf("Desea seguir utilizando la calculadora? s/n: ");
+    scanf(" %c", &respuesta);
+    return respuesta;
+}
+
+// Menu para preguntar si queremos seguir operando con el ultimo resultado
+char menu_seguir_operando()
+{
+    char respuesta;
+    printf("---------------------- CALCULADORA ----------------------\n");
+    printf("Desea seguir utilizando seguir operando con el ultimo resultado? s/n: ");
+    scanf(" %c", &respuesta);
+    return respuesta;
+}
+
+// Menu para preguntar si queremos mostrar los resultados de la calculadora
+char menu_mostrar_resultados()
+{
+    char respuesta;
+    printf("---------------------- CALCULADORA ----------------------\n");
+    printf("Desea mostrar los resultados guardados? s/n: ");
+    scanf(" %c", &respuesta);
+    return respuesta;
+}
+
 // Función principal del programa
 int main(int argc, char const *argv[])
 {
 
     // Defino mis variables
+    double resultados[100]; // Representa un vector de resultados guardados por las operaciones realizadas
     double valor_1;         // Representa el primer valor de la operacion
     double valor_2;         // Representa el segundo valor de la operacion
     double resultado;       // Representa resultado de la operacion
-    double resultados[100]; // Representa un vector de resultados guardados por las operaciones realizadas
     int i;                  // Representa el numero de iteraciones para poder recorrer el vector resultados
-    int cont_salida = 1;    // Representa un contador de salida
-    int operacion;          // Representa la operacion a realizar por medio de un numero del 1 al 9
     int cant_elementos = 0; // Representa la cantidad de elementos que va a poseer el vector resultados (vector parcial)
+    int cont_salida = 1;    // Representa un contador de salida
+    int opcion;             // Representa la opcion que elegimos en nuestro menu
     char respuesta_1;       // Representa la respuesta de si desea comenzar con el programa
     char respuesta_2;       // Representa la respuesta de si desea seguir operando con el ultimo resultado
     char respuesta_3;       // Representa la respuesta de si desea mostrar todos los resultados hechos
@@ -76,26 +135,11 @@ int main(int argc, char const *argv[])
     // Si respuesta_1 es 's' o 'S' se entra al bucle
     while (respuesta_1 == 's' || respuesta_1 == 'S')
     {
+        // Procedimiento donde pedimos la opcion y, segun el caso, nos enviara a cada opcion del case (opciones del menu)
 
-        // Menú de operaciones
-        printf("---------------------- MENU DE OPERACIONES ----------------------\n");
-        printf("SUMA : 1\n");
-        printf("RESTA : 2\n");
-        printf("MULTIPLICACION : 3\n");
-        printf("DIVISION : 4\n");
-        printf("POTENCIA : 5\n");
-        printf("RAIZ CUADRADA : 6\n");
-        printf("SENO : 7\n");
-        printf("COSENO : 8\n");
-        printf("TANGENTE : 9\n");
-        printf("-----------------------------------------------------------------\n");
-
-        // Ingreso un numero para poder determinar que operacion realizar que se guardara en la variable operacion
-        printf("Ingrese la operacion que desea realizar (1,2,3,4,5,6,7,8,9): ");
-        scanf(" %i", &operacion);
-
+        opcion = opciones_menu();
         // Realizo un switch para evaluar las mpltiples opciones que tengo
-        switch (operacion)
+        switch (opcion)
         {
         case 1: // Si operacion es igual a 1 SUMO
 
@@ -311,16 +355,14 @@ int main(int argc, char const *argv[])
         }
 
         // Primero pregunto si deseo seguir utilizando el programa y el valor se guarda en respuesta_1
-        printf("---------------------- INGRESO DE DATOS ----------------------\n");
-        printf("Desea seguir utilizando la calculadora? s/n: ");
-        scanf(" %c", &respuesta_1);
+
+        respuesta_1 = menu_salir();
 
         // Si respuesta_1 es 's' o "S"
         if (respuesta_1 == 's' || respuesta_1 == 'S')
         {
             // Pregunto si deseo seguir operando con el utlimo resultado
-            printf("Desea seguir operando con el ultimo resultado? s/n: ");
-            scanf(" %c", &respuesta_2);
+            respuesta_2 = menu_seguir_operando();
 
             // Si respuesta_2 es 's' o 'S' valor_1 tomara el valor de la variable resultado
             if (respuesta_2 == 's' || respuesta_2 == 'S')
@@ -332,9 +374,7 @@ int main(int argc, char const *argv[])
         }
 
         // Pregunto si deseo mostrar los resultados guardados
-        printf("Desea mostrar los resultados guardados? s/n: ");
-        scanf(" %c", &respuesta_3);
-
+        respuesta_3 = menu_mostrar_resultados();
         // Si respuesta_3 es 's' o 'S'
         if (respuesta_3 == 's' || respuesta_3 == 'S')
         {
