@@ -5,6 +5,13 @@ int main()
     // Tenemos nuestro vector de numeros
     int vect[5] = {2, 3, 5, 1, 4};
 
+    // Imprimimos por pantalla el vector sin ordenar
+    printf("\nArreglo sin ordenar:\n");
+    for (int i = 0; i < 5; i++)
+    {
+        printf("\n%i\n ", vect[i]);
+    }
+
     // Vamos a declar unas variables que nos van a servir para realizar el ordanamiento de tipo burbuja
     int i, j, aux;
 
