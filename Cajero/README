@@ -1,7 +1,7 @@
 # Cajero Automático
 
 Aplicación de consola que emula un cajero automático que contiene las siguientes funciones: 
-* Registro y Alta de Usuario
+* Registro y Alta de Usuario (Terminado)
 * Logueo de Usuario al Sistema
 * Ingesar dinero
 * Retirar dinero
