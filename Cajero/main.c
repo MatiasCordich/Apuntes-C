@@ -11,6 +11,7 @@
 // Estructora
 typedef struct
 {
+    int id_cuenta;
     char nombre[50];
     char password[50];
     double saldo;
@@ -20,6 +21,9 @@ typedef struct
     int contador_historial;
 
 } Usuario;
+
+// Variable global para llevar el seguimiento del último id_cuenta asignado
+int ultimo_contador_id = 0;
 
 // Prototipos de funciones
 
@@ -139,22 +143,6 @@ int esUnNumero(const char *string)
     return 1; // La cadena es completamente numérica
 }
 
-// Funcion para validar si el nombre del usuario ya exsite
-int validarExistenciaNombre(Usuario *usuarios, int contador_usurios, const char *nombre_usuario)
-{
-
-    // Recorre la lista de usuarios y verifica si el nombre de usuario ya está en uso
-
-    for (int i = 0; i < contador_usurios; i++)
-    {
-        if (strcmp(usuarios[i].nombre, nombre_usuario) == 0)
-        {
-            return 1; // Si esta en uso me devuelve un 1
-        }
-    }
-    return 0; // Si no esta en uso me devuelve un 0
-}
-
 // Funcion para registar un Usuario
 void registrarUsario(Usuario **usuarios, int *contador_usuarios)
 {
@@ -167,43 +155,21 @@ void registrarUsario(Usuario **usuarios, int *contador_usuarios)
         if (*usuarios == NULL)
         {
             printf("Error al asignar memoria.\n");
-            return;
+            exit(EXIT_FAILURE);
         }
     }
 
     // Registro el nuevo usuario
-
-    char username_ingesado[50];
     char clave_ingresada[50];
     int existe_usuario;
 
-    do
-    {
-        // Solicita al usuario ingresar el nombre de usuario
-        printf("Ingrese el nombre de usuario: ");
-        scanf("%s", username_ingesado);
+    (*usuarios)[*contador_usuarios].id_cuenta = ultimo_contador_id++;
 
-        // Valido si el nombre ya esta en uso
-        existe_usuario = validarExistenciaNombre(*usuarios, *contador_usuarios, username_ingesado);
+    // Solicita al usuario ingresar el nombre de usuario
+    printf("Ingrese el nombre de usuario: ");
+    scanf("%s", (*usuarios)[*contador_usuarios].nombre);
 
-        // Evaluo en resultado obtenido
-
-        // Si el nombre ya esta ocupado, lanzo un mensaje de error
-        if (existe_usuario)
-        {
-            printf("-----------------------------------------------------------------------\n");
-            printf("|   ERROR: El nombre ya se encuentra ingresado, intentelo de vuelta.  |\n");
-            printf("-----------------------------------------------------------------------\n");
-            return;
-        }
-        else
-        {
-            // Caso contrario guardo el nombre del usuario en la estructura
-            strcpy((*usuarios)[*contador_usuarios].nombre, username_ingesado);
-        }
-    } while (existe_usuario);
-
-    // Ingreso la clave
+        // Ingreso la clave
     do
     {
         // Solicita al usuario ingresar la contraseña
@@ -239,7 +205,7 @@ void registrarUsario(Usuario **usuarios, int *contador_usuarios)
     if ((*usuarios)[*contador_usuarios].contactos == NULL)
     {
         printf("Error al asignar memoria.\n");
-        return;
+        exit(EXIT_FAILURE);
     }
 
     // Inicializa los contactos con cadenas de caracteres vacios
@@ -250,7 +216,7 @@ void registrarUsario(Usuario **usuarios, int *contador_usuarios)
         if ((*usuarios)[*contador_usuarios].contactos[i] == NULL)
         {
             printf("Error al asignar memoria.\n");
-            return;
+            exit(EXIT_FAILURE);
         }
         strcpy((*usuarios)[*contador_usuarios].contactos[i], "");
     }
@@ -277,7 +243,7 @@ int loguearse(Usuario *usuarios, int contador_usuarios, int *usuario_actual)
     {
         if (strcmp(usuarios[i].password, clave_ingresada) == 0)
         {
-            printf("Incio de sesion exitoso");
+            printf("Incio de sesion exitoso\n");
             *usuario_actual = i;
             return i;
         }
@@ -336,10 +302,93 @@ void retirarDinero(Usuario *usuario)
 
 void agregarContacto(Usuario *usuario)
 {
+    // Valido que el usuario no tenga la lista de usuarios llena
+    if (usuario->contactos < MAX_CONTACTOS)
+    {
+        char nombre_nuevo_contacto[50];
+        printf("Ingrese el nombre del contacto: ");
+        scanf("%s", nombre_nuevo_contacto);
+
+        // Valido que el contacto exista
+        int existe_contacto = 0;
+
+        for (int i = 0; i < usuario->contador_contactos; i++)
+        {
+            if (strcmp(usuario->contactos[i], nombre_nuevo_contacto) == 0)
+            {
+                existe_contacto = 1;
+                break;
+            }
+        }
+
+        if (existe_contacto)
+        {
+            printf("------------------------------------------------------------------------------\n");
+            printf("|   ERROR: El contacto ya existe, no se puede agregar contactos duplicados.  |\n");
+            printf("------------------------------------------------------------------------------\n");
+        }
+        else
+        {
+            strcpy(usuario->contactos[usuario->contador_contactos], nombre_nuevo_contacto);
+            usuario->contador_contactos++;
+        }
+    }
+    else
+    {
+        printf("------------------------------------------\n");
+        printf("| Has llegado a tu limites de contactos. |\n");
+        printf("------------------------------------------\n");
+    }
 }
 
 void transferirDinero(Usuario *usuarios, int contador_usuarios, int usuario_actual)
 {
+    char destinatario[50];
+    double monto;
+
+    printf("Ingrese el nombre del destinatario: ");
+    scanf("%s", destinatario);
+
+    int existe_destinatario = -1;
+
+    for (int i = 0; i < usuarios[usuario_actual].contador_contactos; i++)
+    {
+        if (strcmp(usuarios[usuario_actual].contactos[i], destinatario))
+        {
+            existe_destinatario = i;
+            break;
+        }
+    }
+
+    if (existe_destinatario == -1)
+    {
+        printf("-------------------------------------\n");
+        printf("| ERROR: Destinatario no encontrado |\n");
+        printf("-------------------------------------\n");
+        return;
+    }
+
+    printf("Ingrese la cantidad a trasferir: ");
+    scanf("%f", &monto);
+
+    if (monto > 0 && monto <= usuarios[usuario_actual].saldo)
+    {
+        // Disminuzco el saldo del usuario
+        usuarios[usuario_actual].saldo -= monto;
+
+        // Aumento el saldo del destinatario
+        usuarios[existe_destinatario].saldo += monto;
+
+        // Registro en el historial del usuario
+
+        // Registro en el historial del destinatario
+    }
+    else
+    {
+        printf("-----------------------------------------------\n");
+        printf("| ERROR: La cantidad a transferir es invalida |\n");
+        printf("-----------------------------------------------\n");
+    }
 }
 
 void verHistorial(Usuario usuario)
