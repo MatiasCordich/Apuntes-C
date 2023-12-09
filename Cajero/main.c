@@ -37,11 +37,12 @@ int loguearse(Usuario *usuarios, int contador_usuarios, int *usuario_actual);
 int esUnNumero(const char *string);
 int validarExistenciaNombre(Usuario *usuarios, int contador_usuarios, const char *nombre_usuario);
 
-void depositar();
-void retirarDinero();
-void agregarContacto();
-void transferirDinero();
-void verHistorial();
+// Funciones propios del sistema bancario
+void depositar(Usuario *usuario);
+void retirarDinero(Usuario *usuario);
+void agregarContacto(Usuario *usuario);
+void transferirDinero(Usuario *usuarios, int contador_usuarios, int usuario_actual);
+void verHistorial(Usuario usuario);
 
 // ----------------------------------- Funcion principal -----------------------------------
 int main()
@@ -283,47 +284,146 @@ int loguearse(Usuario *usuarios, int contador_usuarios, int *usuario_actual)
     }
 
     printf("Clave incorrecta");
-    
+
     return -1;
 }
-    // Funcion donde se engloba todas las funcionalidades del menu
-    void menu(Usuario * *usuarios, int *contador_usuarios, int *usuario_actual)
+
+// Funciones del sistema bancario
+
+void depositar(Usuario *usuario)
+{
+    double monto_ingresado;
+
+    printf("Ingrese la cantidad a depositar: ");
+    scanf("%f", &monto_ingresado);
+
+    if (monto_ingresado > 0)
     {
-
-        int opcion;
-
-        do
-        {
-            opcion = elegirOpcion();
-
-            switch (opcion)
-            {
-            case 1:
-                registrarUsario(usuarios, contador_usuarios);
-                break;
-            case 2:
-                printf("HAS SELECCIONADO LA OPCION 2\n");
-                break;
-            case 3:
-                printf("HAS SELECCIONADO LA OPCION 3\n");
-                break;
-            case 4:
-                printf("HAS SELECCIONADO LA OPCION 4\n");
-                break;
-            case 5:
-                printf("HAS SELECCIONADO LA OPCION 5\n");
-                break;
-            case 6:
-                printf("HAS SELECCIONADO LA OPCION 6\n");
-                break;
-            case 7:
-                printf("HAS SELECCIONADO LA OPCION 7\n");
-                break;
-            default:
-                printf("--------------------------------------------------\n");
-                printf("| HAS SALIDO DEL PROGRAMA. QUE TENGA UN BUEN DIA. |\n");
-                printf("--------------------------------------------------\n");
-                break;
-            }
-        } while (opcion != 0);
+        usuario->saldo += monto_ingresado;
+        printf("---------------------------------------------------------------\n");
+        printf("| Deposito realizado con exito. Su saldo acutal es de: $ %.2f |\n", usuario->saldo);
+        printf("---------------------------------------------------------------\n");
     }
+    else
+    {
+        printf("------------------------------------\n");
+        printf("| ERROR: Ingrese un saldo positivo |\n");
+        printf("------------------------------------\n");
+    }
+}
+
+void retirarDinero(Usuario *usuario)
+{
+    double monto_ingresado;
+
+    printf("Ingrese el monto a retirar: ");
+    scanf("%f", &monto_ingresado);
+
+    if (monto_ingresado > 0 && monto_ingresado <= usuario->saldo)
+    {
+        usuario->saldo -= monto_ingresado;
+        printf("-------------------------------------------------\n");
+        printf("| Retiro exitoso. Su saldo acutal es de: $ %.2f |\n", usuario->saldo);
+        printf("-------------------------------------------------\n");
+    }
+    else
+    {
+        printf("--------------------------------------\n");
+        printf("| ERROR: Ingrese una cantidad valida |\n");
+        printf("--------------------------------------\n");
+    }
+}
+
+void agregarContacto(Usuario *usuario)
+{
+}
+
+void transferirDinero(Usuario *usuarios, int contador_usuarios, int usuario_actual)
+{
+}
+
+void verHistorial(Usuario usuario)
+{
+}
+
+// Funcion donde se engloba todas las funcionalidades del menu
+void menu(Usuario **usuarios, int *contador_usuarios, int *usuario_actual)
+{
+
+    int opcion;
+
+    do
+    {
+        opcion = elegirOpcion();
+
+        switch (opcion)
+        {
+        case 1:
+            registrarUsario(usuarios, contador_usuarios);
+            break;
+        case 2:
+            *usuario_actual = loguearse(*usuarios, *contador_usuarios, usuario_actual);
+            break;
+        case 3:
+            if (*usuario_actual != -1)
+            {
+                printf("HAS SELECCIONADO LA OPCION 3\n");
+            }
+            else
+            {
+                printf("ERROR: Inicie sesion primero\n");
+            }
+            break;
+        case 4:
+            if (*usuario_actual != -1)
+            {
+                printf("HAS SELECCIONADO LA OPCION 3\n");
+            }
+            else
+            {
+                printf("ERROR: Inicie sesion primero\n");
+            }
+            break;
+        case 5:
+            if (*usuario_actual != -1)
+            {
+                printf("HAS SELECCIONADO LA OPCION 3\n");
+            }
+            else
+            {
+                printf("ERROR: Inicie sesion primero\n");
+            }
+            break;
+        case 6:
+            if (*usuario_actual != -1)
+            {
+                printf("HAS SELECCIONADO LA OPCION 3\n");
+            }
+            else
+            {
+                printf("ERROR: Inicie sesion primero\n");
+            }
+            break;
+        case 7:
+            if (*usuario_actual != -1)
+            {
+                printf("HAS SELECCIONADO LA OPCION 3\n");
+            }
+            else
+            {
+                printf("ERROR: Inicie sesion primero\n");
+            }
+            break;
+        case 0:
+            printf("--------------------------------------------------\n");
+            printf("| HAS SALIDO DEL PROGRAMA. QUE TENGA UN BUEN DIA. |\n");
+            printf("--------------------------------------------------\n");
+            break;
+        default:
+            printf("------------------------------------------------\n");
+            printf("| ERROR: Opcion no valida. Intentelo de nuevo. |\n");
+            printf("------------------------------------------------\n");
+            break;
+        }
+    } while (opcion != 0);
+}
