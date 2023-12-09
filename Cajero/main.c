@@ -31,7 +31,7 @@ void realizarOpcion();
 
 // Funciones para el registro y logueo de usuarios
 void registrarUsuario(Usuario **usuarios, int *contador_usuarios);
-int loguearUsuario();
+int loguearse(Usuario *usuarios, int contador_usuarios, int *usuario_actual);
 
 // Validaciones
 int esUnNumero(const char *string);
@@ -263,44 +263,67 @@ void registrarUsario(Usuario **usuarios, int *contador_usuarios)
     printf("-------------------------------------------------------------------------\n");
 }
 
-// Funcion donde se engloba todas las funcionalidades del menu
-void menu(Usuario **usuarios, int *contador_usuarios, int *usuario_actual)
+// Funcion para loguearse al cajero
+int loguearse(Usuario *usuarios, int contador_usuarios, int *usuario_actual)
 {
+    char clave_ingresada[50];
 
-    int opcion;
+    printf("Ingrese su clave: ");
+    scanf("%s", clave_ingresada);
 
-    do
+    // Busco el usuario en la lista
+    for (int i = 0; i < contador_usuarios; i++)
     {
-        opcion = elegirOpcion();
-
-        switch (opcion)
+        if (strcmp(usuarios[i].password, clave_ingresada) == 0)
         {
-        case 1:
-            registrarUsario(usuarios, contador_usuarios);
-            break;
-        case 2:
-            printf("HAS SELECCIONADO LA OPCION 2\n");
-            break;
-        case 3:
-            printf("HAS SELECCIONADO LA OPCION 3\n");
-            break;
-        case 4:
-            printf("HAS SELECCIONADO LA OPCION 4\n");
-            break;
-        case 5:
-            printf("HAS SELECCIONADO LA OPCION 5\n");
-            break;
-        case 6:
-            printf("HAS SELECCIONADO LA OPCION 6\n");
-            break;
-        case 7:
-            printf("HAS SELECCIONADO LA OPCION 7\n");
-            break;
-        default:
-            printf("--------------------------------------------------\n");
-            printf("| HAS SALIDO DEL PROGRAMA. QUE TENGA UN BUEN DIA. |\n");
-            printf("--------------------------------------------------\n");
-            break;
+            printf("Incio de sesion exitoso");
+            *usuario_actual = i;
+            return i;
         }
-    } while (opcion != 0);
+    }
+
+    printf("Clave incorrecta");
+    
+    return -1;
 }
+    // Funcion donde se engloba todas las funcionalidades del menu
+    void menu(Usuario * *usuarios, int *contador_usuarios, int *usuario_actual)
+    {
+
+        int opcion;
+
+        do
+        {
+            opcion = elegirOpcion();
+
+            switch (opcion)
+            {
+            case 1:
+                registrarUsario(usuarios, contador_usuarios);
+                break;
+            case 2:
+                printf("HAS SELECCIONADO LA OPCION 2\n");
+                break;
+            case 3:
+                printf("HAS SELECCIONADO LA OPCION 3\n");
+                break;
+            case 4:
+                printf("HAS SELECCIONADO LA OPCION 4\n");
+                break;
+            case 5:
+                printf("HAS SELECCIONADO LA OPCION 5\n");
+                break;
+            case 6:
+                printf("HAS SELECCIONADO LA OPCION 6\n");
+                break;
+            case 7:
+                printf("HAS SELECCIONADO LA OPCION 7\n");
+                break;
+            default:
+                printf("--------------------------------------------------\n");
+                printf("| HAS SALIDO DEL PROGRAMA. QUE TENGA UN BUEN DIA. |\n");
+                printf("--------------------------------------------------\n");
+                break;
+            }
+        } while (opcion != 0);
+    }
