@@ -169,7 +169,7 @@ void registrarUsario(Usuario **usuarios, int *contador_usuarios)
     printf("Ingrese el nombre de usuario: ");
     scanf("%s", (*usuarios)[*contador_usuarios].nombre);
 
-        // Ingreso la clave
+    // Ingreso la clave
     do
     {
         // Solicita al usuario ingresar la contraseña
@@ -300,46 +300,69 @@ void retirarDinero(Usuario *usuario)
     }
 }
 
-void agregarContacto(Usuario *usuario)
+void agregarContacto(Usuario *usuario, Usuario *usuarios, int contador_usuarios)
 {
     // Valido que el usuario no tenga la lista de usuarios llena
     if (usuario->contactos < MAX_CONTACTOS)
     {
-        char nombre_nuevo_contacto[50];
-        printf("Ingrese el nombre del contacto: ");
-        scanf("%s", nombre_nuevo_contacto);
+        int id_contacto_ingresado;
+        printf("Ingrese el ID de cuenta del contacto: ");
+        scanf("%d", &id_contacto_ingresado);
 
         // Valido que el contacto exista
-        int existe_contacto = 0;
+        int existe_contacto = -1;
 
-        for (int i = 0; i < usuario->contador_contactos; i++)
+        for (int i = 0; i < contador_usuarios; i++)
         {
-            if (strcmp(usuario->contactos[i], nombre_nuevo_contacto) == 0)
+            if (usuarios[i].id_cuenta == id_contacto_ingresado)
             {
-                existe_contacto = 1;
+                existe_contacto = i;
                 break;
             }
         }
 
-        if (existe_contacto)
+        if (existe_contacto != -1)
         {
-            printf("------------------------------------------------------------------------------\n");
-            printf("|   ERROR: El contacto ya existe, no se puede agregar contactos duplicados.  |\n");
-            printf("------------------------------------------------------------------------------\n");
+            int esta_agregado = 0;
+            for (int i = 0; i < usuario->contador_contactos; i++)
+            {
+                if (usuario->contactos[i] == usuarios[esta_agregado].nombre)
+                {
+                    esta_agregado = 1;
+                    break;
+                }
+            }
+
+            if (!esta_agregado)
+            {
+                strcpy(usuario->contactos[usuario->contador_contactos], usuarios[esta_agregado].nombre);
+                usuario->contador_contactos++;
+                printf("--------------------------------\n");
+                printf("| Contacto Agregado con exito. |\n");
+                printf("--------------------------------\n");
+            }
+            else
+            {
+                printf("--------------------------------------------\n");
+                printf("| ERROR: El contacto ya existe en su lista. |\n");
+                printf("--------------------------------------------\n");
+            }
         }
         else
         {
-            strcpy(usuario->contactos[usuario->contador_contactos], nombre_nuevo_contacto);
-            usuario->contador_contactos++;
+            printf("-------------------------------------------------------------\n");
+            printf("| ERROR: No se encontro el contacto con el ID especificado. |\n");
+            printf("-------------------------------------------------------------\n");
         }
     }
     else
     {
-        printf("------------------------------------------\n");
-        printf("| Has llegado a tu limites de contactos. |\n");
-        printf("------------------------------------------\n");
+        printf("---------------------------------------------------------------\n");
+        printf("| ERROR: No se pueden agregar mas contacto. Limite alcanzado. |\n");
+        printf("---------------------------------------------------------------\n");
     }
 }
+
 
 void transferirDinero(Usuario *usuarios, int contador_usuarios, int usuario_actual)
 {
