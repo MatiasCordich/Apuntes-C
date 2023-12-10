@@ -44,7 +44,7 @@ int validarExistenciaNombre(Usuario *usuarios, int contador_usuarios, const char
 // Funciones propios del sistema bancario
 void depositar(Usuario *usuario);
 void retirarDinero(Usuario *usuario);
-void agregarContacto(Usuario *usuario);
+void agregarContacto(Usuario *usuario, Usuario *usuarios, int contador_usuarios);
 void transferirDinero(Usuario *usuarios, int contador_usuarios, int usuario_actual);
 void verHistorial(Usuario usuario);
 
