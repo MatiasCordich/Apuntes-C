@@ -23,7 +23,7 @@ typedef struct
 } Usuario;
 
 // Variable global para llevar el seguimiento del último id_cuenta asignado
-int ultimo_contador_id = 0;
+int ultimo_contador_id = 1;
 
 // Prototipos de funciones
 
@@ -148,7 +148,6 @@ void registrarUsario(Usuario **usuarios, int *contador_usuarios)
 {
 
     // Aumenta la capacidad de usuarios si es necesario
-
     if (*contador_usuarios % 10 == 0)
     {
         *usuarios = realloc(*usuarios, (*contador_usuarios + 10) * sizeof(Usuario));
@@ -161,8 +160,8 @@ void registrarUsario(Usuario **usuarios, int *contador_usuarios)
 
     // Registro el nuevo usuario
     char clave_ingresada[50];
-    int existe_usuario;
 
+    // Le asigno un numero de id
     (*usuarios)[*contador_usuarios].id_cuenta = ultimo_contador_id++;
 
     // Solicita al usuario ingresar el nombre de usuario
@@ -228,28 +227,75 @@ void registrarUsario(Usuario **usuarios, int *contador_usuarios)
     printf("-------------------------------------------------------------------------\n");
     printf("|                     USUARIO REGISTRADO CON EXITO.                     |\n");
     printf("-------------------------------------------------------------------------\n");
+
+    // Mostrar los datos del usuario registrado
+    printf("-------------------------------------------------------------------------\n");
+    printf("                     Datos del usuario registrado\n");
+    printf("-------------------------------------------------------------------------\n");
+    printf("ID CUENTA: %d\n", (*usuarios)[*contador_usuarios - 1].id_cuenta);
+    printf("NOMBRE: %s\n", (*usuarios)[*contador_usuarios - 1].nombre);
+    printf("SALDO: %.2f\n", (*usuarios)[*contador_usuarios - 1].saldo);
+    printf("-------------------------------------------------------------------------\n");
 }
 
 // Funcion para loguearse al cajero
 int loguearse(Usuario *usuarios, int contador_usuarios, int *usuario_actual)
 {
-    char clave_ingresada[50];
+    int id_ingresado;
 
-    printf("Ingrese su clave: ");
-    scanf("%s", clave_ingresada);
+    printf("Ingrese su ID de usuario: ");
+    scanf("%d", &id_ingresado);
 
-    // Busco el usuario en la lista
+    // Busco el usuario en la lista por su ID
+
+    int usuario_encontrado = -1;
+
     for (int i = 0; i < contador_usuarios; i++)
     {
-        if (strcmp(usuarios[i].password, clave_ingresada) == 0)
+        if (usuarios[i].id_cuenta == id_ingresado)
         {
-            printf("Incio de sesion exitoso\n");
-            *usuario_actual = i;
-            return i;
+            usuario_encontrado = i;
+            break;
         }
     }
 
-    printf("Clave incorrecta");
+    // Valido si el usuario se encontro o no
+    if (usuario_encontrado != -1)
+    {
+
+        // Si existe ingreso su clave
+        char clave_ingresada[50];
+
+        printf("Ingrese su clave numerica: ");
+        scanf("%s", clave_ingresada);
+
+        // Valido si la clave es correcta
+        if (strcmp(usuarios[usuario_encontrado].password, clave_ingresada) == 0)
+        {
+            printf("----------------------------------------------\n");
+            printf("|          INICIO DE SESION EXITOSO          |\n");
+            printf("----------------------------------------------\n");
+            printf(" Bienvenido, %s.\n", usuarios[usuario_encontrado].nombre);
+            printf("-----------------------------------------------\n");
+
+            *usuario_actual = usuario_encontrado;
+
+            // Si es correcta devuelvo el usario encontrado
+            return usuario_encontrado;
+        }
+        else
+        {
+            printf("--------------------------------------------------\n");
+            printf("|   ERROR: Clave incorecta, intente nuevamente.  |\n");
+            printf("--------------------------------------------------\n");
+        }
+    }
+    else
+    {
+        printf("-------------------------------------------------------\n");
+        printf("|   ERROR: Usuario no encontrado. Registrese primero  |\n");
+        printf("-------------------------------------------------------\n");
+    }
 
     return -1;
 }
@@ -260,11 +306,14 @@ void depositar(Usuario *usuario)
 {
     double monto_ingresado;
 
+    // Ingreso la cantidad a depositar
     printf("Ingrese la cantidad a depositar: ");
-    scanf("%f", &monto_ingresado);
+    scanf("%lf", &monto_ingresado);
 
+    // Valido que el monto a depositar sea un numero positivo
     if (monto_ingresado > 0)
     {
+        // Aumento el saldo del usuario y muestro el nuevo saldo
         usuario->saldo += monto_ingresado;
         printf("---------------------------------------------------------------\n");
         printf("| Deposito realizado con exito. Su saldo acutal es de: $ %.2f |\n", usuario->saldo);
@@ -282,11 +331,14 @@ void retirarDinero(Usuario *usuario)
 {
     double monto_ingresado;
 
+    // Ingreso el monto a retirar
     printf("Ingrese el monto a retirar: ");
-    scanf("%f", &monto_ingresado);
+    scanf("%lf", &monto_ingresado);
 
+    // Valido que el monto ingresado sea positivo y que no supere al saldo del usuario
     if (monto_ingresado > 0 && monto_ingresado <= usuario->saldo)
     {
+        // Disminuyo el saldo del usuario y muestro el saldo del usuario
         usuario->saldo -= monto_ingresado;
         printf("-------------------------------------------------\n");
         printf("| Retiro exitoso. Su saldo acutal es de: $ %.2f |\n", usuario->saldo);
@@ -303,13 +355,14 @@ void retirarDinero(Usuario *usuario)
 void agregarContacto(Usuario *usuario, Usuario *usuarios, int contador_usuarios)
 {
     // Valido que el usuario no tenga la lista de usuarios llena
-    if (usuario->contactos < MAX_CONTACTOS)
+    if (usuario->contador_contactos < MAX_CONTACTOS)
     {
+        // Ingreso el ID del usuario a agregar como contacto
         int id_contacto_ingresado;
         printf("Ingrese el ID de cuenta del contacto: ");
         scanf("%d", &id_contacto_ingresado);
 
-        // Valido que el contacto exista
+        // Valido que el contacto a ingresar exista en la lista de usuarios
         int existe_contacto = -1;
 
         for (int i = 0; i < contador_usuarios; i++)
@@ -321,22 +374,31 @@ void agregarContacto(Usuario *usuario, Usuario *usuarios, int contador_usuarios)
             }
         }
 
+        // Si existe sigo con las validaciones
         if (existe_contacto != -1)
         {
+            // Valido si el contacto a agregar ya esta agregado
             int esta_agregado = 0;
+
+            // Valido mediante el contador de contactos del usuario
             for (int i = 0; i < usuario->contador_contactos; i++)
             {
-                if (usuario->contactos[i] == usuarios[esta_agregado].nombre)
+                if (strcmp(usuario->contactos[i], usuarios[existe_contacto].nombre) == 0)
                 {
                     esta_agregado = 1;
                     break;
                 }
             }
 
+            // Agregar el contacto si no esta en la lista del usuario
+
             if (!esta_agregado)
             {
+                // Copiar el nombre de usuario del contacto a la lista de contactos
                 strcpy(usuario->contactos[usuario->contador_contactos], usuarios[esta_agregado].nombre);
+
                 usuario->contador_contactos++;
+
                 printf("--------------------------------\n");
                 printf("| Contacto Agregado con exito. |\n");
                 printf("--------------------------------\n");
@@ -363,20 +425,21 @@ void agregarContacto(Usuario *usuario, Usuario *usuarios, int contador_usuarios)
     }
 }
 
-
 void transferirDinero(Usuario *usuarios, int contador_usuarios, int usuario_actual)
 {
-    char destinatario[50];
+    int id_destinatario;
     double monto;
 
-    printf("Ingrese el nombre del destinatario: ");
-    scanf("%s", destinatario);
+    printf("Ingrese el ID del destinatario: ");
+    scanf("%d", &id_destinatario);
+
+    // Busco el usuario por su ID de cuenta
 
     int existe_destinatario = -1;
 
-    for (int i = 0; i < usuarios[usuario_actual].contador_contactos; i++)
+    for (int i = 0; i < contador_usuarios; i++)
     {
-        if (strcmp(usuarios[usuario_actual].contactos[i], destinatario))
+        if (usuarios[i].id_cuenta == id_destinatario)
         {
             existe_destinatario = i;
             break;
@@ -392,7 +455,7 @@ void transferirDinero(Usuario *usuarios, int contador_usuarios, int usuario_actu
     }
 
     printf("Ingrese la cantidad a trasferir: ");
-    scanf("%f", &monto);
+    scanf("%lf", &monto);
 
     if (monto > 0 && monto <= usuarios[usuario_actual].saldo)
     {
@@ -402,9 +465,18 @@ void transferirDinero(Usuario *usuarios, int contador_usuarios, int usuario_actu
         // Aumento el saldo del destinatario
         usuarios[existe_destinatario].saldo += monto;
 
-        // Registro en el historial del usuario
+        // Registro la transferencia en el historial del usuario que hace la transferencia
+        sprintf(usuarios[usuario_actual].historial[usuarios[usuario_actual].contador_historial],
+                "Transferencia de %.2f a %s", monto, usuarios[existe_destinatario].nombre);
 
-        // Registro en el historial del destinatario
+        // Registra la transferencia en el historial del destinatario
+        sprintf(usuarios[existe_destinatario].historial[usuarios[existe_destinatario].contador_historial],
+                "Transferencia de %.2f recibida de %s", monto, usuarios[usuario_actual].nombre);
+
+        // Aumento el historial del destinatario
+        usuarios[existe_destinatario].contador_historial++;
+
+        printf("Transferencia exitosa. Nuevo saldo: $ %.2f\n", usuarios[usuario_actual].saldo);
     }
     else
     {
@@ -416,6 +488,22 @@ void transferirDinero(Usuario *usuarios, int contador_usuarios, int usuario_actu
 
 void verHistorial(Usuario usuario)
 {
+    printf("---------------------------------------------------------------\n");
+    printf("Historial de transferencias para el usuario %s:\n", usuario.nombre);
+    printf("---------------------------------------------------------------\n");
+
+    if (usuario.contador_historial == 0)
+    {
+        printf("---------------------------------------------------\n");
+        printf("| No hay transferencias realizadas por el momento |\n");
+        printf("---------------------------------------------------\n");
+        return;
+    }
+
+    for (int i = 0; i < usuario.contador_historial; i++)
+    {
+        printf("%d. %s\n", i + 1, usuario.historial[i]);
+    }
 }
 
 // Funcion donde se engloba todas las funcionalidades del menu
@@ -439,7 +527,7 @@ void menu(Usuario **usuarios, int *contador_usuarios, int *usuario_actual)
         case 3:
             if (*usuario_actual != -1)
             {
-                printf("HAS SELECCIONADO LA OPCION 3\n");
+                depositar(&(*usuarios)[*usuario_actual]);
             }
             else
             {
@@ -449,7 +537,7 @@ void menu(Usuario **usuarios, int *contador_usuarios, int *usuario_actual)
         case 4:
             if (*usuario_actual != -1)
             {
-                printf("HAS SELECCIONADO LA OPCION 3\n");
+                retirarDinero(&(*usuarios)[*usuario_actual]);
             }
             else
             {
@@ -459,7 +547,7 @@ void menu(Usuario **usuarios, int *contador_usuarios, int *usuario_actual)
         case 5:
             if (*usuario_actual != -1)
             {
-                printf("HAS SELECCIONADO LA OPCION 3\n");
+                agregarContacto(&(*usuarios)[*usuario_actual], *usuarios, *contador_usuarios);
             }
             else
             {
@@ -469,7 +557,7 @@ void menu(Usuario **usuarios, int *contador_usuarios, int *usuario_actual)
         case 6:
             if (*usuario_actual != -1)
             {
-                printf("HAS SELECCIONADO LA OPCION 3\n");
+                transferirDinero(*usuarios, *contador_usuarios, *usuario_actual);
             }
             else
             {
@@ -479,7 +567,7 @@ void menu(Usuario **usuarios, int *contador_usuarios, int *usuario_actual)
         case 7:
             if (*usuario_actual != -1)
             {
-                printf("HAS SELECCIONADO LA OPCION 3\n");
+                verHistorial((*usuarios)[*usuario_actual]);
             }
             else
             {
