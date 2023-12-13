@@ -525,6 +525,7 @@ void menu(Usuario **usuarios, int *contador_usuarios, int *usuario_actual)
             *usuario_actual = loguearse(*usuarios, *contador_usuarios, usuario_actual);
             break;
         case 3:
+            // De la opcion 3 en adelante debe tener un usuario
             if (*usuario_actual != -1)
             {
                 depositar(&(*usuarios)[*usuario_actual]);
