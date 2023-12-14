@@ -532,7 +532,9 @@ void menu(Usuario **usuarios, int *contador_usuarios, int *usuario_actual)
             }
             else
             {
-                printf("ERROR: Inicie sesion primero\n");
+                printf("---------------------------------------------------\n");
+                printf("| ERROR: Inicie sesion primero                    |\n");
+                printf("---------------------------------------------------\n");
             }
             break;
         case 4:
@@ -542,7 +544,9 @@ void menu(Usuario **usuarios, int *contador_usuarios, int *usuario_actual)
             }
             else
             {
-                printf("ERROR: Inicie sesion primero\n");
+                printf("---------------------------------------------------\n");
+                printf("| ERROR: Inicie sesion primero                    |\n");
+                printf("---------------------------------------------------\n");
             }
             break;
         case 5:
@@ -552,7 +556,9 @@ void menu(Usuario **usuarios, int *contador_usuarios, int *usuario_actual)
             }
             else
             {
-                printf("ERROR: Inicie sesion primero\n");
+                printf("---------------------------------------------------\n");
+                printf("| ERROR: Inicie sesion primero                    |\n");
+                printf("---------------------------------------------------\n");
             }
             break;
         case 6:
@@ -562,7 +568,9 @@ void menu(Usuario **usuarios, int *contador_usuarios, int *usuario_actual)
             }
             else
             {
-                printf("ERROR: Inicie sesion primero\n");
+                printf("---------------------------------------------------\n");
+                printf("| ERROR: Inicie sesion primero                    |\n");
+                printf("---------------------------------------------------\n");
             }
             break;
         case 7:
@@ -572,7 +580,9 @@ void menu(Usuario **usuarios, int *contador_usuarios, int *usuario_actual)
             }
             else
             {
-                printf("ERROR: Inicie sesion primero\n");
+                printf("---------------------------------------------------\n");
+                printf("| ERROR: Inicie sesion primero                    |\n");
+                printf("---------------------------------------------------\n");
             }
             break;
         case 0:
