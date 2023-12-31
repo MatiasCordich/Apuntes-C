@@ -60,7 +60,7 @@ int main(int argc, char const *argv[])
     printf("Ingrese un valor a buscar: ");
     scanf("%d", &searched_item);
 
-    // Llamo a la funcion de busqueda bianria
+    // Llamo a la funcion de busqueda binaria
     int result = binarySearch(arr, 0, arr_size - 1, searched_item);
 
     // Imprimo el resutado
