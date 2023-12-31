@@ -45,7 +45,7 @@ int binarySearch(int arr[], int i, int d, int x)
     return -1;
 }
 
-int main(int argc, char const *argv[])
+int main()
 {
 
     // Vector de ejemplo ordenado
