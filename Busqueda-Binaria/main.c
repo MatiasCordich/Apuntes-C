@@ -1,6 +1,8 @@
 /*
 --------- BUSQUEDA BINARIA EN C ---------
 
+Fecha de creacion: 30/12/2023 
+
 La funcion binarySearch cuenta con los siguienters parametos:
 
     arr[]: Un arreglo de enteros que representa la lista ordenada.
