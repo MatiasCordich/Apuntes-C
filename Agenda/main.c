@@ -11,6 +11,7 @@ int main(int argc, char const *argv[])
     // Cargar la agenda desde el archivo
     crearAgenda(agenda, &num_contactos, "agenda.dat");
 
+    // Elegimos la opcion y la guardamos en una variable
     int opcion;
 
     do
