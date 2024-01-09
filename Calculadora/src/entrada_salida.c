@@ -31,8 +31,9 @@ void mostarMenu()
 void mostrarOpciones()
 {
     printf("----------- OPERACIONES -----------\n");
-    printf("1 SUMA\n");
-    printf("2 RESTA\n");
-    printf("3 MULTIPLICACION\n");
-    printf("4 DIVISION\n");
+    printf("( + ) SUMA\n");
+    printf("( - ) RESTA\n");
+    printf("( * ) MULTIPLICACION\n");
+    printf("( / ) DIVISION\n");
+    printf("Ingrese una operacion: ");
 };

@@ -1,4 +1,4 @@
-#include "operaciones.h"
+#include "calculadora.h"
 #include "entrada_salida.h"
 
 int main(int argc, char const *argv[])
@@ -9,6 +9,7 @@ int main(int argc, char const *argv[])
     char operador;
     int opcion;
     int resultadoGuardado = 0;
+    float ultimoResultado = 0;
 
     do
     {
@@ -19,26 +20,22 @@ int main(int argc, char const *argv[])
         {
         case 1:
             mostrarOpciones();
-            switch (operador)
-            {
-            case '+':
-                /* code */
-                break;
-            case '-':
-                /* code */
-                break;
-            case '*':
-                /* code */
-                break;
-            case '/':
-                /* code */
-                break;
+            scanf("%c", &operador);
 
-            default:
-                printf("ERROR: OPERADOR NO VALIDO.\n");
-                break;
+            printf("Ingrese el primer numero: ");
+            scanf("%f", &num1);
+
+            printf("Ingrese el segundo numero: ");
+            scanf("%f", &num2);
+
+            resultado = realizarOperacion(num1, num2, operador, &resultadoGuardado, &ultimoResultado);
+
+            if (resultadoGuardado)
+            {
+                mostrarResultado(resultado);
             }
             break;
+
         case 2:
             if (resultadoGuardado)
             {
