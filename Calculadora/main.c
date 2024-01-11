@@ -3,6 +3,7 @@
 
 int main(int argc, char const *argv[])
 {
+    // Variables
     float num1;
     float num2;
     float resultado = 0;
@@ -11,6 +12,7 @@ int main(int argc, char const *argv[])
     int resultadoGuardado = 0;
     float ultimoResultado = 0;
 
+    // Entro al sistema del programa 
     do
     {
         mostarMenu();
