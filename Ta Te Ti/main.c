@@ -46,8 +46,68 @@ void realizarMovimiento(char tablero[3][3], int fila, int columna, char jugador)
     tablero[fila][columna] = jugador;
 }
 
+// Validar eleccion del simbolo
+char validarEleccion(){
+
+    char eleccion;
+    int entrada_valida;
+
+    do
+    {
+        // Mostramos las opciones
+        printf("Por favor, elige X o O en base al numero correspondiente: \n");
+        printf("(1) X\n");
+        printf("(2) O\n");
+        printf("Opcion elegida: ");
+
+        // Leemos lo que ingresamos por teclado
+        entrada_valida = scanf(" %c", &eleccion);
+
+        // Verificamos si la entrada no es un caracter o si no es 1 ni 2
+        if (entrada_valida != 1 || (eleccion != '1' && eleccion != '2') )
+        {
+            // Si es asi, mostramos mensaje de error
+            printf("ERROR, OPCION INVALIDA, ELIGE 1 PARA 'X' o 2 PARA 'O'.\n");
+
+            // Limpiar el búfer del teclado en caso de entrada no válida
+            while (getchar() != '\n');
+        } else {
+            break; // Si la eleccion es valida salimos del bucle
+        }
+        
+    } while (1);
+
+    return (eleccion == '1') ? 'X' : 'O';
+    
+    
+}
+
 int main()
 {
-    printf("Hola mundo");
+    char tablero[3][3] = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
+    int fila, columna;
+    char jugador_1, jugador_2;
+    char jugador_actual;
+    int movimientos = 0;
+
+
+    // Validar la eleccion del Jugador 1
+    printf("Jugador 1, elige ser:\n");
+    jugador_1 = validarEleccion();
+
+    // Le asigno el simbolo restante al Jugador 2
+    jugador_2 = (jugador_1 == 'X') ? 'O' : 'X';
+
+    // Inicializamos al primer jugador
+    jugador_actual = jugador_1;
+
+    while (1)
+    {
+        imprimirTablero(tablero);
+    }
+    
+
+
+    
     return 0;
 }
