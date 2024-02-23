@@ -104,6 +104,35 @@ int main()
     while (1)
     {
         imprimirTablero(tablero);
+
+        printf("Turno del jugador %c. Ingrese fila y columna: ", jugador_actual);
+        scanf("%d %d", &fila, &columna);
+
+        if (tablero[fila][columna] != ' ')
+        {
+            printf("---------------------------------");
+            printf("CASILLA OCUPADA, INTENTELO DE NEUVO");
+            printf("---------------------------------");
+            continue;
+        }
+
+        realizarMovimiento(tablero, fila, columna, jugador_actual);
+        movimientos++;
+
+        
+        if (verificarGanador(tablero, jugador_actual)) {
+            imprimirTablero(tablero);
+            printf("¡El jugador %c ha ganado!\n", jugador_actual);
+            break;
+        } else if (movimientos == 9) {
+            imprimirTablero(tablero);
+            printf("¡Es un empate!\n");
+            break;
+        }
+
+        // Cambiar al siguiente jugador
+        jugador_actual = (jugador_actual == jugador_1) ? jugador_2 : jugador_1;
+        
     }
     
 
